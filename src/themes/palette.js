@@ -1,0 +1,8 @@
+const palette = {
+  baseColor: '#398b93',
+  borderRadius: '10px',
+  imageBig: '100px',
+  imageSmall: '60px',
+  padding: '10px'
+}
+export default palette

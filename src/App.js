@@ -1,25 +1,79 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Table from './components/Table'
 
 function App() {
+  const [characters, setCharacters] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [numPages, setNumPages] = useState(0)
+
+  // * Fetch -> GET characters
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}`)
+      .then((response) => response.json())
+      .then((json) => {
+        setCharacters(json.results)
+        setNumPages(json.info.pages)
+      })
+      .catch((err) => {
+        throw err
+      })
+  }, [currentPage])
+
+  const columns = [
+    { accessor: 'id', columnName: 'ID', sortable: true },
+    { accessor: 'name', columnName: 'NAME', filterable: true, sortable: true },
+    {
+      accessor: 'status',
+      columnName: 'STATUS',
+      filterable: true
+    },
+    {
+      accessor: 'species',
+      columnName: 'SPECIES',
+      filterable: true,
+      sortable: true
+    },
+    { accessor: 'image', image: true }
+  ]
+
+  const expandedRow = (item) => {
+    const { gender, episode } = item // destructuring
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          textAlign: 'left'
+        }}
+      >
+        <div>Gender: {gender}</div>
+        <div>Number of Episodes: {episode.length}</div>
+      </div>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        marginBottom: '200px',
+        display: 'flex',
+        justifyContent: 'center'
+      }}
+    >
+      <Table
+        title="Rick &amp; Morty characters"
+        columns={columns}
+        data={characters}
+        currentPage={currentPage}
+        numPages={numPages}
+        setPage={setCurrentPage}
+        viewPagination
+        paginationBottom={false}
+        expandedRow={expandedRow}
+        expandedDefault={false}
+      />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
