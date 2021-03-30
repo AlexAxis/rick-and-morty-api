@@ -41,10 +41,13 @@ table {
   td,
   th {
     color: darken($baseColor, 10%);
-    padding: $padding;
+    padding-top: $padding;
+    padding-bottom: $padding;
   }
 
   td {
+    padding-left: $padding;
+    padding-right: $padding;
     text-align: center;
     vertical-align: middle;
 
