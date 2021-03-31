@@ -53,3 +53,12 @@ Just like styled-components (that have a theme) SASS is very useful to create an
 ##### Future Improvements
 
 Just like we send a component element as the prop expandedRow, the idea of the next feature is to also being able to send componets to be render in any desirable item from the header or row of the list
+
+
+##### Live preview
+[https://alexis-rick-and-morty-api.netlify.app/](https://alexis-rick-and-morty-api.netlify.app/)
+
+
+##### Documentation
+[https://alexis-rick-and-morty-api-docs.netlify.app/](https://alexis-rick-and-morty-api-docs.netlify.app/)
+
